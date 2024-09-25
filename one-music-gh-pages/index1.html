@@ -887,10 +887,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="js/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
-
+    <script src="js/autoplay.js"></script>
     <script>
     // 页面加载时执行
     window.addEventListener('load', function() {
+
       // 将页面滚动到顶部
       window.scrollTo(0, 0);
 
@@ -907,69 +908,69 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         }, document.title);
       });
 
-    document.addEventListener('DOMContentLoaded', function() {
-      // 创建音频元素
-      var audio = new Audio('./audio/we are the world.mp3');
-      audio.src = './audio/we are the world.mp3';
-      audio.autoplay = true;
-      audio.loop = true; // 如果需要循环播放
-
-      // 初始化播放/暂停按钮
-      let toggleButton = document.querySelector('.toggle-audio');
-
-      // 设置音频播放状态
-      var isPlaying = true;
-
-      // 初始化播放器
-      initAudioPlayer(audio, toggleButton);
-
-      function initAudioPlayer(audioElement, buttonElement) {
-        // 静默播放音频
-        audioElement.muted = true;
-        audioElement.play().catch(function(error) {
-          console.error('Audio playback failed:', error);
-        });
-
-        // 播放/暂停音频
-        buttonElement.addEventListener('click', function() {
-          if (isPlaying) {
-            audioElement.pause();
-            buttonElement.textContent = 'Play';
-            isPlaying = false;
-          } else {
-            playAudio();
-            buttonElement.textContent = 'Pause';
-            isPlaying = true;
-          }
-        });
-
-        // 在首次用户交互时恢复音量
-        let firstInteraction = true;
-        window.addEventListener('click', function() {
-          if (firstInteraction) {
-            firstInteraction = false;
-            playAudio();
-          }
-        });
-
-        // 恢复音量并播放音频
-        function playAudio() {
-          audioElement.muted = false;
-          audioElement.volume = 1;
-          audioElement.play().catch(function(error) {
-            console.error('Audio playback failed:', error);
-            // 尝试解决静音策略问题
-            if (!audioElement.muted && !audioElement.paused) {
-              // 播放无声的一小段音频，然后播放主音频
-              audioElement.volume = 0;
-              audioElement.play().then(function() {
-                audioElement.volume = 1;
-              });
-            }
-          });
-        }
-      }
-    });
+    // document.addEventListener('DOMContentLoaded', function() {
+    //   // 创建音频元素
+    //   var audio = new Audio('./audio/we are the world.mp3');
+    //   audio.src = './audio/we are the world.mp3';
+    //   audio.autoplay = true;
+    //   audio.loop = true; // 如果需要循环播放
+    //
+    //   // 初始化播放/暂停按钮
+    //   let toggleButton = document.querySelector('.toggle-audio');
+    //
+    //   // 设置音频播放状态
+    //   var isPlaying = true;
+    //
+    //   // 初始化播放器
+    //   initAudioPlayer(audio, toggleButton);
+    //
+    //   function initAudioPlayer(audioElement, buttonElement) {
+    //     // 静默播放音频
+    //     audioElement.muted = true;
+    //     audioElement.play().catch(function(error) {
+    //       console.error('Audio playback failed:', error);
+    //     });
+    //
+    //     // 播放/暂停音频
+    //     buttonElement.addEventListener('click', function() {
+    //       if (isPlaying) {
+    //         audioElement.pause();
+    //         buttonElement.textContent = 'Play';
+    //         isPlaying = false;
+    //       } else {
+    //         playAudio();
+    //         buttonElement.textContent = 'Pause';
+    //         isPlaying = true;
+    //       }
+    //     });
+    //
+    //     // 在首次用户交互时恢复音量
+    //     let firstInteraction = true;
+    //     window.addEventListener('click', function() {
+    //       if (firstInteraction) {
+    //         firstInteraction = false;
+    //         playAudio();
+    //       }
+    //     });
+    //
+    //     // 恢复音量并播放音频
+    //     function playAudio() {
+    //       audioElement.muted = false;
+    //       audioElement.volume = 1;
+    //       audioElement.play().catch(function(error) {
+    //         console.error('Audio playback failed:', error);
+    //         // 尝试解决静音策略问题
+    //         if (!audioElement.muted && !audioElement.paused) {
+    //           // 播放无声的一小段音频，然后播放主音频
+    //           audioElement.volume = 0;
+    //           audioElement.play().then(function() {
+    //             audioElement.volume = 1;
+    //           });
+    //         }
+    //       });
+    //     }
+    //   }
+    // });
     </script>
 </body>
 
