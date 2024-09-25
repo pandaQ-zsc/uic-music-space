@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Audio Player</title>
+</head>
+<body>
+<!-- 音频播放器 -->
+<audio id="background-music" src="audio/we_are_the_world.mp3" loop muted></audio>
+<!-- 创建一个按钮用于触发播放 -->
+<button id="play-button">Play Audio</button>
+
+<script>
+// 页面加载完成后自动模拟点击事件
+document.addEventListener('DOMContentLoaded', function() {
+  var audio = document.getElementById('background-music');
+  var button = document.getElementById('play-button');
+
+  // 绑定点击事件
+  button.addEventListener('click', function() {
+    console.log('1111')
+    audio.muted = false; // 取消静音
+    audio.play(); // 播放音频
+    audio.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.play();
+    }, false); // 当音频结束时从头开始播放
+  });
+
+  // 模拟点击事件
+  var clickEvent = new MouseEvent('click', {
+    'view': window,
+    'bubbles': true,
+    'cancelable': true
+  });
+  button.dispatchEvent(clickEvent);
+});
+</script>
+</body>
+</html>
