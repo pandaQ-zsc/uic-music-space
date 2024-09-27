@@ -28,11 +28,11 @@ document.addEventListener('DOMContentLoaded', function() {
     buttonElement.addEventListener('click', function() {
       if (isPlaying) {
         audioElement.pause();
-        buttonElement.textContent = 'Play';
+        buttonElement.textContent = `Play`;
         isPlaying = false;
       } else {
         playAudio();
-        buttonElement.textContent = 'Pause';
+        buttonElement.textContent = 'Stop';
         isPlaying = true;
       }
       localStorage.setItem('audioIsPlaying', isPlaying);
