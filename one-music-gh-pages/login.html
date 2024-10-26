@@ -60,52 +60,54 @@
                                 <ul>
                                     <li><a href="index1.html">Home</a></li>
                                     <li><a href="albums-store.html">Albums</a></li>
-                                    <li><a href="#">Pages</a>
-                                        <ul class="dropdown">
-                                            <li><a href="index1.html">Home</a></li>
-                                            <li><a href="albums-store.html">Albums</a></li>
-                                            <li><a href="event.html">Events</a></li>
-                                            <li><a href="blog.html">News</a></li>
-                                            <li><a href="contact.html">Contact</a></li>
-                                            <li><a href="elements.html">Elements</a></li>
-                                            <li><a href="login.html">Login</a></li>
-                                            <li><a href="#">Dropdown</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="#">Even Dropdown</a></li>
-                                                    <li><a href="#">Even Dropdown</a></li>
-                                                    <li><a href="#">Even Dropdown</a></li>
-                                                    <li><a href="#">Even Dropdown</a>
-                                                        <ul class="dropdown">
-                                                            <li><a href="#">Deeply Dropdown</a></li>
-                                                            <li><a href="#">Deeply Dropdown</a></li>
-                                                            <li><a href="#">Deeply Dropdown</a></li>
-                                                            <li><a href="#">Deeply Dropdown</a></li>
-                                                            <li><a href="#">Deeply Dropdown</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="#">Even Dropdown</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
+<!--                                     <li><a href="#">Pages</a> -->
+<!--                                         <ul class="dropdown"> -->
+<!--                                             <li><a href="index1.html">Home</a></li> -->
+<!--                                             <li><a href="albums-store.html">Albums</a></li> -->
+<!--                                             <li><a href="event.html">Events</a></li> -->
+<!--                                             <li><a href="blog.html">News</a></li> -->
+<!--                                             <li><a href="contact.html">Contact</a></li> -->
+<!--                                             <li><a href="elements.html">Elements</a></li> -->
+<!--                                             <li><a href="login.html">Login</a></li> -->
+<!--                                             <li><a href="#">Dropdown</a> -->
+<!--                                                 <ul class="dropdown"> -->
+<!--                                                     <li><a href="#">Even Dropdown</a></li> -->
+<!--                                                     <li><a href="#">Even Dropdown</a></li> -->
+<!--                                                     <li><a href="#">Even Dropdown</a></li> -->
+<!--                                                     <li><a href="#">Even Dropdown</a> -->
+<!--                                                         <ul class="dropdown"> -->
+<!--                                                             <li><a href="#">Deeply Dropdown</a></li> -->
+<!--                                                             <li><a href="#">Deeply Dropdown</a></li> -->
+<!--                                                             <li><a href="#">Deeply Dropdown</a></li> -->
+<!--                                                             <li><a href="#">Deeply Dropdown</a></li> -->
+<!--                                                             <li><a href="#">Deeply Dropdown</a></li> -->
+<!--                                                         </ul> -->
+<!--                                                     </li> -->
+<!--                                                     <li><a href="#">Even Dropdown</a></li> -->
+<!--                                                 </ul> -->
+<!--                                             </li> -->
+<!--                                         </ul> -->
+<!--                                     </li> -->
                                     <li><a href="event.html">Events</a></li>
                                     <li><a href="blog.html">News</a></li>
                                     <li><a href="contact.html">Contact</a></li>
                                 </ul>
 
-                                <!-- Login/Register & Cart Button -->
-                                <div class="login-register-cart-button d-flex align-items-center">
-                                    <!-- Login/Register -->
-                                    <div class="login-register-btn mr-50">
-                                        <a href="login.html" id="loginBtn">Login / Register</a>
-                                    </div>
+                            <!-- Login/Register & Cart Button -->
+                            <div class="login-register-cart-button d-flex align-items-center">
+                              <!-- Login/Register -->
+                              <div class="login-register-btn mr-50">
+                                <a href="login.html" id="loginBtn">Login / Register</a>
+                              </div>
 
-                                  <div class="cart-btn">
-                                    <!--                                         <p><span class="icon-shopping-cart"></span> <span class="quantity">=</span></p> -->
-                                    <button class="toggle-audio">Pause</button>
-                                  </div>
-                                </div>
+                              <!-- Cart Button -->
+                              <div class="cart-btn">
+                                <!--                                         <p><span class="icon-shopping-cart"></span> <span class="quantity">=</span></p> -->
+                                <button class="toggle-audio">Pause</button>
+                              </div>
                             </div>
+                          </div>
+
                             <!-- Nav End -->
 
                         </div>
@@ -134,7 +136,6 @@
                         <h3>Welcome Back</h3>
                         <!-- Login Form -->
                         <div class="login-form">
-                            <form action="#" method="post">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Email address</label>
                                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter E-mail">
@@ -144,8 +145,7 @@
                                     <label for="exampleInputPassword1">Password</label>
                                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                                 </div>
-                                <button type="submit" class="btn oneMusic-btn mt-30">Login</button>
-                            </form>
+                              <button  class="btn oneMusic-btn mt-30" onclick="validateLogin()">Login</button>
                         </div>
                     </div>
                 </div>
@@ -179,6 +179,26 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             </div>
         </div>
     </footer>
+
+    <script>
+    function validateLogin() {
+      var email = document.getElementById('exampleInputEmail1').value;
+      var password = document.getElementById('exampleInputPassword1').value;
+      if (email === 'xiongqiang@qq.com' && password === '123') {
+        let loginBtn = document.querySelector('#loginBtn')
+        //loginBtn控件内容为xiongqiang@qq.com
+        console.log(loginBtn)
+        loginBtn.innerHTML = email;
+        console.log(loginBtn.innerHTML)
+        // window.location.href = '../index2.html'; // 替换为你要跳转的URL
+        window.location.href = './index1.html';
+        return true;
+      } else {
+        alert('Invalid credentials');
+        return false;
+      }
+    }
+    </script>
     <!-- ##### Footer Area Start ##### -->
 
     <!-- ##### All Javascript Script ##### -->
