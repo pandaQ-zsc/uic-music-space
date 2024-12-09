@@ -441,7 +441,7 @@
                         </div>
                         <div class="song-play-area">
                             <div class="song-name">
-                                <p>01. Main Hit Song</p>
+                                <p>环境戏剧｜Space performing reading</p>
                             </div>
                             <audio preload="auto" controls>
                                 <source src="audio/we_are_the_world.mp3">
@@ -458,7 +458,7 @@
                         </div>
                         <div class="song-play-area">
                             <div class="song-name">
-                                <p>01. Main Hit Song</p>
+                                <p>海边对话｜Seaside dialogue</p>
                             </div>
                             <audio preload="auto" controls>
                                 <source src="audio/we_are_the_world.mp3">
@@ -475,7 +475,7 @@
                         </div>
                         <div class="song-play-area">
                             <div class="song-name">
-                                <p>01. Main Hit Song</p>
+                                <p>戏剧日常｜Theatre daily life</p>
                             </div>
                             <audio preload="auto" controls>
                                 <source src="audio/we_are_the_world.mp3">
@@ -492,7 +492,7 @@
                         </div>
                         <div class="song-play-area">
                             <div class="song-name">
-                                <p>01. Main Hit Song</p>
+                                <p>未来戏剧｜Future theater SHOWCASE</p>
                             </div>
                             <audio preload="auto" controls>
                                 <source src="audio/we_are_the_world.mp3">
@@ -596,5 +596,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="js/active.js"></script>
     <script src="js/autoplay.js"></script>
 </body>
+
+<script>
+    window.onload =function(){
+        document.getElementById("loginBtn").innerHTML = localStorage.getItem('UserLoginNameText')
+    }
+</script>
 
 </html>

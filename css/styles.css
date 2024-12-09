@@ -296,3 +296,7 @@ footer .content {
   justify-content: space-between;
   align-items: center;
 }
+
+.introH5 {
+  font-family: Helvetica !important;
+}

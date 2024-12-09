@@ -17,6 +17,8 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 
+    <script src="../js/server.js"></script>
+
 </head>
 
 <body>
@@ -97,6 +99,7 @@
                             <div class="login-register-cart-button d-flex align-items-center">
                               <!-- Login/Register -->
                               <div class="login-register-btn mr-50">
+                                <a id="loginNameBox"></a>
                                 <a href="login.html" id="loginBtn">Login / Register</a>
                               </div>
 
@@ -137,9 +140,9 @@
                         <!-- Login Form -->
                         <div class="login-form">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter E-mail">
-                                    <small id="emailHelp" class="form-text text-muted"><i class="fa fa-lock mr-2"></i>We'll never share your email with anyone else.</small>
+                                    <label for="exampleInputEmail1">UIC ID</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter UIC ID">
+                                    <small id="emailHelp" class="form-text text-muted"><i class="fa fa-lock mr-2"></i>We'll never share your ID with anyone else.</small>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Password</label>
@@ -181,22 +184,56 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     </footer>
 
     <script>
+    const apiBaseUrl = 'http://localhost:3000/api';
+  
+    window.onload =function(){
+        localStorage.setItem('UserLoginNameText', "登录");
+        document.getElementById("loginBtn").innerHTML = localStorage.getItem('UserLoginNameText')
+    }
+
     function validateLogin() {
-      var email = document.getElementById('exampleInputEmail1').value;
+      var uid = document.getElementById('exampleInputEmail1').value;
       var password = document.getElementById('exampleInputPassword1').value;
-      if (email === 'xiongqiang@qq.com' && password === '123') {
-        let loginBtn = document.querySelector('#loginBtn')
-        //loginBtn控件内容为xiongqiang@qq.com
-        console.log(loginBtn)
-        loginBtn.innerHTML = email;
-        console.log(loginBtn.innerHTML)
-        // window.location.href = '../index2.html'; // 替换为你要跳转的URL
-        window.location.href = './index1.html';
-        return true;
-      } else {
-        alert('Invalid credentials');
-        return false;
+
+      if (uid && password) {
+        fetch(`${apiBaseUrl}/ulogin`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ uid: uid, password: password })
+        })
+          .then(response => response.json())
+          .then(data => {
+            data.forEach(user => {
+            alert(`登录成功！${user.name} 欢迎您！`);
+            // document.getElementById("loginNameBox").innerHTML =user.name
+            document.getElementById("loginBtn").innerHTML = user.name
+            // document.getElementById("loginBtn").style.fontSize="12px"
+            localStorage.setItem('UserLoginNameText', user.name);
+          });
+
+            // console.dir(data)
+            // alert(`操作成功: ${data.name}`);
+          })
+          .catch(error => {
+            console.error('登录失败: ', error);
+          });
       }
+
+    //   if (email === 'xiongqiang@qq.com' && password === '123') {
+    //     let loginBtn = document.querySelector('#loginBtn')
+    //     //loginBtn控件内容为xiongqiang@qq.com
+    //     console.log(loginBtn)
+    //     loginBtn.innerHTML = email;
+    //     console.log(loginBtn.innerHTML)
+    //     // window.location.href = '../index2.html'; // 替换为你要跳转的URL
+    //     window.location.href = './index1.html';
+    //     return true;
+    //   } else {
+    //     alert('Invalid credentials');
+    //     return false;
+    //   }
     }
     </script>
     <!-- ##### Footer Area Start ##### -->

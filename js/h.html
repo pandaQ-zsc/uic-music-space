@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>用户管理系统</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    h1 {
+      color: #343a40;
+    }
+    .list-group-item {
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container mt-5">
+  <h1 class="text-center">用户管理系统</h1>
+  <div class="d-flex justify-content-center mb-3">
+    <button id="loadUsers" class="btn btn-primary me-2">加载用户</button>
+    <button id="addUser" class="btn btn-success me-2">添加用户</button>
+    <button id="updatePassword" class="btn btn-warning me-2">修改密码</button>
+    <button id="deleteUser" class="btn btn-danger">删除用户</button>
+  </div>
+  <ul id="userList" class="list-group"></ul>
+</div>
+
+<script>
+const apiBaseUrl = 'http://localhost:3000/api';
+
+// 加载用户数据
+document.getElementById('loadUsers').addEventListener('click', () => {
+  fetch(`${apiBaseUrl}/users`)
+  .then(response => response.json())
+  .then(data => {
+    const userList = document.getElementById('userList');
+    userList.innerHTML = ''; // 清空用户列表
+    data.forEach(user => {
+      const li = document.createElement('li');
+      li.className = 'list-group-item d-flex justify-content-between align-items-center';
+      li.textContent = `ID: ${user.uid}, Name: ${user.name}`;
+      userList.appendChild(li);
+    });
+  })
+  .catch(error => {
+    console.error('加载用户失败:', error);
+  });
+});
+
+// 添加用户数据
+document.getElementById('addUser').addEventListener('click', () => {
+  const userName = prompt('请输入用户名:');
+  const userPassword = prompt('请输入用户密码:');
+  const userUid = prompt('请输入用户UID（可选）:');
+
+  if (userName && userPassword) {
+    fetch(`${apiBaseUrl}/users`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ uid: userUid, name: userName, password: userPassword })
+    })
+    .then(response => response.json())
+    .then(data => {
+      alert(`用户添加成功！ID: ${data.uid}`);
+    })
+    .catch(error => {
+      console.error('添加用户失败:', error);
+    });
+  }
+});
+
+// 修改用户密码
+document.getElementById('updatePassword').addEventListener('click', () => {
+  const userId = prompt('请输入用户ID:');
+  const newPassword = prompt('请输入新密码:');
+
+  if (userId && newPassword) {
+    fetch(`${apiBaseUrl}/users/${userId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ password: newPassword })
+    })
+    .then(response => response.json())
+    .then(data => {
+      alert(`用户密码修改成功！ID: ${userId}`);
+    })
+    .catch(error => {
+      console.error('修改用户密码失败:', error);
+    });
+  }
+});
+
+// 删除用户
+document.getElementById('deleteUser').addEventListener('click', () => {
+  const userId = prompt('请输入用户ID:');
+
+  if (userId) {
+    fetch(`${apiBaseUrl}/users/${userId}`, {
+      method: 'DELETE'
+    })
+    .then(response => response.json())
+    .then(data => {
+      alert(`用户删除成功！ID: ${userId}`);
+    })
+    .catch(error => {
+      console.error('删除用户失败:', error);
+    });
+  }
+});
+
+</script>
+</body>
+</html>

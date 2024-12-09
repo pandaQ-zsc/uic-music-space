@@ -386,5 +386,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="js/active.js"></script>
     <script src="js/autoplay.js"></script>
 </body>
-
+<script>
+    window.onload =function(){
+        document.getElementById("loginBtn").innerHTML = localStorage.getItem('UserLoginNameText')
+    }
+</script>
 </html>
